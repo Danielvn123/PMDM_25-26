@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="button">BOTÓN</string>
+    <string name="textView">Botón</string>
+    <string name="button2">BOTÓN</string>
+    <string name="button3">BOTÓN</string>
+    <string name="textView2">ImageButton e un botón con icona</string>
+    <string name="togglebuttonA">ACTIVADO</string>
+    <string name="togglebuttonD">DESACTIVADO</string>
+    <string name="textView3">Toggle Button marcado ao arrincar</string>
+    <string name="textView7A">Activado</string>
+    <string name="email">Introduza o seu email</string>
+</resources>

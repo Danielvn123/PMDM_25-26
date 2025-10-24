@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">Ejercicio 5 Componentes</string>
+    <string name="app_name" translatable="false">Ejercicio 5 Componentes</string>
+    <string name="button">BOTÓN</string>
+    <string name="textView">Botón</string>
+    <string name="textView8" translatable="false">¿Cómo te encuentras?</string>
+    <string name="button2">BOTÓN</string>
+    <string name="button3">VOLVER A LA MAIN ACTIVITY</string>
+    <string name="button4" translatable="false">ACTION BAR</string>
+    <string name="button5" translatable="false">TERCIARIA</string>
+    <string name="button6" translatable="false">BOTÓN</string>
+    <string name="textView2">ImageButton y un botón con icono</string>
+    <string name="togglebuttonA">ACTIVADO</string>
+    <string name="togglebuttonD">DESACTIVADO</string>
+    <string name="textView3">Toggle Button marcado al arrancar</string>
+    <string name="checkbox4" translatable="false">CheckBox1</string>
+    <string name="checkbox5" translatable="false">CheckBox2</string>
+    <string name="checkbox6" translatable="false">CheckBox3</string>
+    <string name="radiobutton1" translatable="false">RadioButton</string>
+    <string name="radiobutton2" translatable="false">RadioButton</string>
+    <string name="textView7A">Activado</string>
+    <string name="textView4" translatable="false">Seekbar</string>
+    <string name="textView5" translatable="false">50</string>
+    <string name="ratingbar" translatable="false">RatingBar</string>
+    <string name="email">Introduce tu email</string>
+    <string name="rating" translatable="false">El rating de la ratingBar es:</string>
 </resources>

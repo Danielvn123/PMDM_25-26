@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId = "com.dani.ejercicio5componentes"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -35,6 +35,9 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
+    implementation(libs.mediarouter)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
