@@ -249,6 +249,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Borrar", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.meditar) {
+                EditText editText = findViewById(R.id.editTextTextEmailAddress);
+                editText.setText("");
                 Toast.makeText(this, "Editar", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.submenu) {

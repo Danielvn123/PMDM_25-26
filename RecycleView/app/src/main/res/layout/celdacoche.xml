@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:srcCompat="@drawable/asta" />
+
+    <TextView
+        android:id="@+id/tvmarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="marca"
+        android:textColor="#2196F3"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="67dp" />
+
+    <TextView
+        android:id="@+id/tvmodelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modelo"
+        android:textColor="#F00707"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="31dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

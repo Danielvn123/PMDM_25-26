@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ejercicio5Componentes">
         <activity
+            android:name=".RecycledView"
+            android:exported="false" />
+        <activity
             android:name=".Terciaria"
             android:exported="false" />
         <activity
