@@ -16,8 +16,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     List<Coche> coches;
-        public static List<Coche> rellenarCoches() {
-            List<Coche> coches = new ArrayList<>();
+        public  List<Coche> rellenarCoches() {
+            coches = new ArrayList<>();
             coches.add(new Coche(R.drawable.toyota_corolla_angularrear,"Toyota", "Corolla", 120, 5, 21000));
             coches.add(new Coche(R.drawable.ford_focus_angularfront, "Ford", "Focus", 125, 5, 19500));
             coches.add(new Coche(R.drawable.volkswagen_golf_angularrear,"Volkswagen", "Golf", 150, 5, 25000));
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         coches=rellenarCoches();
         AdaptadorCoche adaptadorCoche = new AdaptadorCoche(coches);
         RecyclerView rv = findViewById(R.id.rv);
