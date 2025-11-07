@@ -31,7 +31,8 @@ import java.util.List;
         @Override
         public void onBindViewHolder(@NonNull CeldaPeliculasJava holder, int position) {
             Pelicula pelicula = peliculas.get(position);
-            holder.foto.setImageResource(pelicula.getPortada());
+            holder.portada.setImageResource(pelicula.getPortada());
+            holder.clasi.setImageResource(pelicula.getClasi());
             holder.titulo.setText(pelicula.getTitulo());
             holder.director.setText(pelicula.getDirector());
         }
@@ -43,13 +44,14 @@ import java.util.List;
 
         public class CeldaPeliculasJava extends RecyclerView.ViewHolder{
             TextView titulo, director;
-            ImageView foto;
+            ImageView portada, clasi;
 
             public CeldaPeliculasJava(@NonNull View itemView) {
                 super(itemView);
                 this.titulo=itemView.findViewById(R.id.tvtitulo);
                 this.director=itemView.findViewById(R.id.tvdirector);
-                this.foto=itemView.findViewById(R.id.imageView);
+                this.portada=itemView.findViewById(R.id.imageView);
+                this.clasi=itemView.findViewById(R.id.imageView2);
             }
             public TextView getTitulo() {
                 return titulo;
@@ -67,12 +69,19 @@ import java.util.List;
                 this.director = director;
             }
 
-            public ImageView getFoto() {
-                return foto;
+            public ImageView getPortada() {
+                return portada;
             }
 
-            public void setFoto(ImageView foto) {
-                this.foto = foto;
+            public void setPortada(ImageView portada) {
+                this.portada = portada;
+            }
+            public ImageView getClasi() {
+                return clasi;
+            }
+
+            public void setClasi(ImageView clasi) {
+                this.clasi = clasi;
             }
         }
     }
