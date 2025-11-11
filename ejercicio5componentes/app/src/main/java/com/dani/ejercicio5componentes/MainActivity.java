@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Boton creado para que al puslar el boton volver esconda la actionbar y al volver a pulsar se vuleva a enseñar
+        //Boton creado para que al pulsar el boton volver esconda la actionbar y al volver a pulsar se vuleva a enseñar
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
