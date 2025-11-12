@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Peliculas">
         <activity
+            android:name=".Terciaria"
+            android:exported="false" />
+        <activity
             android:name=".Secundaria"
             android:exported="false" />
         <activity
