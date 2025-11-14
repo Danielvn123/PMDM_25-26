@@ -57,49 +57,46 @@
             android:id="@+id/tvdirector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:text="Director"
             android:textColor="#100F0F"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/director"
-            tools:layout_editor_absoluteY="56dp" />
+            app:layout_constraintStart_toStartOf="@+id/tvfecha"
+            app:layout_constraintTop_toTopOf="@+id/director" />
 
         <TextView
             android:id="@+id/tvfecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Fecha"
             android:textColor="#100F0F"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvdirector"
-            app:layout_constraintTop_toBottomOf="@+id/tvdirector" />
+            app:layout_constraintStart_toStartOf="@+id/tvduracion"
+            app:layout_constraintTop_toTopOf="@+id/fecha" />
 
         <TextView
             android:id="@+id/tvduracion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="duracion:"
+            android:layout_marginStart="8dp"
+            android:text="duracion"
             android:textColor="#100F0F"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/tvfecha"
-            app:layout_constraintTop_toBottomOf="@+id/tvfecha" />
+            app:layout_constraintStart_toEndOf="@+id/duracion"
+            app:layout_constraintTop_toTopOf="@+id/duracion" />
 
         <TextView
             android:id="@+id/tvsala"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="sala"
             android:textColor="#100F0F"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tvduracion"
-            app:layout_constraintTop_toBottomOf="@+id/tvduracion" />
+            app:layout_constraintTop_toTopOf="@+id/tvsala" />
 
         <TextView
             android:id="@+id/fecha"
@@ -142,8 +139,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="33dp"
+            android:layout_height="37dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"

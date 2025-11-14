@@ -57,8 +57,9 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
         holder.clasi.setImageResource(pelicula.getClasi());
         holder.titulo.setText(pelicula.getTitulo());
         holder.director.setText(pelicula.getDirector());
-        holder.duracion.setText(pelicula.getDuracion());
+        holder.duracion.setText(String.valueOf(pelicula.getDuracion()));
         holder.sala.setText(pelicula.getSala());
+        holder.fecha.setText(String.valueOf(pelicula.getFecha()));
 
         //Establece el color de fondo de un elemento dependiendo si este está seleccionado o no.
         if (selectedPos == position) {
@@ -77,8 +78,9 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
         TextView titulo;
         TextView director;
         TextView duracion;
-
         TextView sala;
+
+        TextView fecha;
         ImageView portada, clasi;
 
         public CeldaInformacionJava(@NonNull View itemView) {
@@ -87,8 +89,10 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
             this.director = itemView.findViewById(R.id.director);
             this.portada = itemView.findViewById(R.id.imageView);
             this.clasi = itemView.findViewById(R.id.imageView2);
-            this.duracion = itemView.findViewById(R.id.duracion);
+            this.duracion = itemView.findViewById(R.id.tvduracion);
             this.sala = itemView.findViewById(R.id.tvsala);
+            this.fecha = itemView.findViewById(R.id.tvfecha);
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +169,13 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
             this.sala = sala;
         }
 
+        public TextView getFecha() {
+            return fecha;
+        }
+
+        public void setFecha(TextView fecha) {
+            this.fecha = fecha;
+        }
 
 //            private View.OnClickListener listener;
 //            public void setOnClickListener(View.OnClickListener listener) {

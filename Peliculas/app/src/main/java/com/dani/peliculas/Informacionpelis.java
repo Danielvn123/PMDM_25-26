@@ -30,7 +30,7 @@ public class Informacionpelis extends AppCompatActivity {
 
             Datos datos = new Datos();
             ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
-        AdaptadorInformacion adaptadorInformacion = new AdaptadorInformacion(peliculas);
+            AdaptadorInformacion adaptadorInformacion = new AdaptadorInformacion(peliculas);
             RecyclerView rvinfopelis = findViewById(R.id.rvinfopelis);
             rvinfopelis.setAdapter(adaptadorInformacion);
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
