@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -47,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
         //Creamos el actionBar y dps ponemos que en el subtitulo salga el numero de peliculas que hay
         ActionBar actionBar = getSupportActionBar();
         actionBar.setSubtitle(String.valueOf(peliculas.toArray().length));
+        getWindow().setNavigationBarColor(getColor(R.color.blue));
 
         //Para quitar la ActionBar al pulsar el floatingActionButton
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (actionBar.isShowing()) {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_principal, menu);
@@ -72,23 +74,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.minformación) {
-            Intent intent = new Intent(this, Secundaria.class);
-            Toast.makeText(this, "Información", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Informacionpelis.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.mfavoritos) {
-            Intent intent = new Intent(this, Terciaria.class);
-            Toast.makeText(this, "Favoritos", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, VerFavoritos.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.manadir) {
-            Toast.makeText(this, "Añadir pelicula", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.mvista) {
-            Toast.makeText(this, "Vista", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.mverfav) {
-            Toast.makeText(this, "Ver Favoritos", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

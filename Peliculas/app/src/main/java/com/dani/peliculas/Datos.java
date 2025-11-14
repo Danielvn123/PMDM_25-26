@@ -85,7 +85,7 @@ public class Datos {
         peliculas.add(ia);
 
         cal.set(1999,6,23);
-        Pelicula matrix=new Pelicula("Matrix","Lana Wachowski, Lilly Wachowski",136,cal.getTime(),"Gran vía",R.drawable.pg13,R.drawable.matrix );
+        Pelicula matrix=new Pelicula("Matrix","Lana Wachowski, \nLilly Wachowski",136,cal.getTime(),"Gran vía",R.drawable.pg13,R.drawable.matrix );
         matrix.setSinopsis("La película plantea que en el futuro, casi todos los seres humanos han sido esclavizados, tras una dura guerra, por las máquinas y las " +
                 "inteligencias artificiales creadas. Estas los tienen en suspensión, y con sus mentes conectadas a una simulación social que representa el final del siglo " +
                 "XX, Matrix. Los seres humanos son usados por las máquinas para obtener energía, y los pocos humanos descendientes de los que no cayeron en las redes de los" +

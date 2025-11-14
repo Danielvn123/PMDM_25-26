@@ -1,5 +1,7 @@
 package com.dani.peliculas;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -83,6 +85,6 @@ public class Pelicula implements Serializable{
         return duracion;
     }
     public void setDuracion(int duracion) {
-        this.duracion=duracion;
+        this.duracion = duracion;
     }
 }

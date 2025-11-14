@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +16,30 @@ import java.util.List;
 
         public AdaptadorPelicula(List<Pelicula> peliculas) {
             this.peliculas = peliculas;
+        }
+
+        //Este atributo nos permite controlar el número del elemento que ha sido seleccionado
+        int selectedPos = RecyclerView.NO_POSITION;
+        public int getSelectedPos() {
+            return selectedPos;
+        }
+        public void setSelectedPos ( int nuevaPos){
+            // Si se pulsa sobre el elemento marcado
+            if (nuevaPos == this.selectedPos) {
+                // Se establece que no hay una posición marcada
+                this.selectedPos = RecyclerView.NO_POSITION;
+                // Se avisa al adaptador para que desmarque esa posición
+                notifyItemChanged(nuevaPos);
+            } else { // El elemento pulsado no está marcado
+                if (this.selectedPos >= 0) { // Si ya hay otra posición marcada
+                    // Se desmarca
+                    notifyItemChanged(this.selectedPos);
+                }
+                // Se actualiza la nueva posición a la posición pulsada
+                this.selectedPos = nuevaPos;
+                // Se marca la nueva posición
+                notifyItemChanged(nuevaPos);
+            }
         }
 
         @NonNull
@@ -36,6 +59,13 @@ import java.util.List;
             holder.clasi.setImageResource(pelicula.getClasi());
             holder.titulo.setText(pelicula.getTitulo());
             holder.director.setText(pelicula.getDirector());
+
+            //Establece el color de fondo de un elemento dependiendo si este está seleccionado o no.
+            if (selectedPos == position) {
+                holder.itemView.setBackgroundResource(R.color.seleccionado);
+            } else {
+                holder.itemView.setBackgroundResource(R.color.lightblue);
+            }
         }
 
         @Override
@@ -49,10 +79,35 @@ import java.util.List;
 
             public CeldaPeliculasJava(@NonNull View itemView) {
                 super(itemView);
-                this.titulo = itemView.findViewById(R.id.tvtitulo);
-                this.director = itemView.findViewById(R.id.tvdirector);
+                this.titulo = itemView.findViewById(R.id.titulo);
+                this.director = itemView.findViewById(R.id.director);
                 this.portada = itemView.findViewById(R.id.imageView);
                 this.clasi = itemView.findViewById(R.id.imageView2);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        int posPulsada=getAdapterPosition();
+                        setSelectedPos(posPulsada);
+
+                        //Para que al pulsar una pelicula salga en el textView el nombre de la pelicula
+                        if (selectedPos>RecyclerView.NO_POSITION) {
+
+                            MainActivity activity = (MainActivity) view.getContext();
+                            TextView tvTitulo = activity.findViewById(R.id.textViewtitulo);
+                            tvTitulo.setText(peliculas.get(selectedPos).getTitulo());
+
+                            //Para que al pulsar otra vez en una pelicula el nombre del textView desaparezca
+                        }else{
+
+                            MainActivity activity = (MainActivity) view.getContext();
+                            TextView tvTitulo = activity.findViewById(R.id.textViewtitulo);
+                            tvTitulo.setText(" ");
+
+                        }
+                    }
+                });
             }
 
             public TextView getTitulo() {
@@ -86,6 +141,7 @@ import java.util.List;
             public void setClasi(ImageView clasi) {
                 this.clasi = clasi;
             }
+
 
 //            private View.OnClickListener listener;
 //            public void setOnClickListener(View.OnClickListener listener) {
