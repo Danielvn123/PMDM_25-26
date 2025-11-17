@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.manadir) {
+            Intent intent = new Intent(this, NuevaPelicula.class);
+            startActivity(intent);
             return true;
         } else if (id == R.id.mvista) {
             return true;

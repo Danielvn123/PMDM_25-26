@@ -1,6 +1,8 @@
 package com.dani.peliculas;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
@@ -25,7 +27,7 @@ public class NuevaPelicula extends AppCompatActivity {
 
         //ActionBar donde aparece la flecha para volver a la MainActivity
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Peliculas");
+        actionBar.setTitle("Nueva película");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         getWindow().setNavigationBarColor(getColor(R.color.blue));
@@ -36,5 +38,12 @@ public class NuevaPelicula extends AppCompatActivity {
             getOnBackPressedDispatcher().onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_secundario, menu);
+        return true;
     }
 }

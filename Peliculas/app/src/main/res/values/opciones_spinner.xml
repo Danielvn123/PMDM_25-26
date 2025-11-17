@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="opciones_spinner">
+            <item>Gran vía</item>
+            <item>Travesia</item>
+            <item>Plaza eliptica</item>
+            <item>Vialia</item>
+            <item>Multicines Norte</item>
+        </string-array>
+</resources>
+
