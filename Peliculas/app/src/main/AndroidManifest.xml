@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Peliculas">
         <activity
+            android:name=".Infoextrapelis"
+            android:exported="false" />
+        <activity
             android:name=".NuevaPelicula"
             android:exported="false" />
         <activity

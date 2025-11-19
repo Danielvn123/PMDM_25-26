@@ -1,5 +1,6 @@
 package com.dani.peliculas;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,28 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
     public AdaptadorInformacion(List<Pelicula> peliculas) {
         this.peliculas = peliculas;
     }
-
+    int selectedPos = RecyclerView.NO_POSITION;
+    public int getSelectedPos() {
+        return selectedPos;
+    }
+    public void setSelectedPos ( int nuevaPos){
+        // Si se pulsa sobre el elemento marcado
+        if (nuevaPos == this.selectedPos) {
+            // Se establece que no hay una posición marcada
+            this.selectedPos = RecyclerView.NO_POSITION;
+            // Se avisa al adaptador para que desmarque esa posición
+            notifyItemChanged(nuevaPos);
+        } else { // El elemento pulsado no está marcado
+            if (this.selectedPos >= 0) { // Si ya hay otra posición marcada
+                // Se desmarca
+                notifyItemChanged(this.selectedPos);
+            }
+            // Se actualiza la nueva posición a la posición pulsada
+            this.selectedPos = nuevaPos;
+            // Se marca la nueva posición
+            notifyItemChanged(nuevaPos);
+        }
+    }
     @NonNull
     @Override
     public CeldaInformacionJava onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -74,9 +96,22 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
             this.fecha = itemView.findViewById(R.id.tvfecha);
             this.favorita = itemView.findViewById(R.id.ivcorazon);
 
-        }
+            itemView.setOnClickListener(view -> {
+                int posPulsada = getAdapterPosition();
+                setSelectedPos(posPulsada);
 
-        public TextView getTitulo() {
+                if (posPulsada != RecyclerView.NO_POSITION) {
+                    // Obtener la película pulsada
+                    Pelicula peliculaSeleccionada = peliculas.get(posPulsada);
+
+                    // Crear Intent y pasar la película
+                    Intent intent = new Intent(view.getContext(), Infoextrapelis.class);
+                    intent.putExtra("pelicula_seleccionada", peliculaSeleccionada);
+                    view.getContext().startActivity(intent);
+                }
+            });
+        }
+                    public TextView getTitulo() {
             return titulo;
         }
 

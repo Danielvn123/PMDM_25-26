@@ -1,11 +1,11 @@
 package com.dani.peliculas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -16,34 +16,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Informacionpelis extends AppCompatActivity {
+public class Infoextrapelis extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_informacion_pelis);
+        setContentView(R.layout.activity_infoextrapelis);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-                    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-                    return insets;
-                });
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-            Datos datos = new Datos();
-            ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
-            AdaptadorInformacion adaptadorInformacion = new AdaptadorInformacion(peliculas);
-            RecyclerView rvinfopelis = findViewById(R.id.rvinfopelis);
-            rvinfopelis.setAdapter(adaptadorInformacion);
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
-            //GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
-            rvinfopelis.setLayoutManager(gridLayoutManager);
-
-        //ActionBar donde aparece la flecha para volver a la MainActivity
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Peliculas");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         getWindow().setNavigationBarColor(getColor(R.color.blue));
+
+        //Para que la salga la informacion propia de la pelicula
+        Pelicula pelicula = (Pelicula) getIntent().getSerializableExtra("pelicula_seleccionada");
+
+        if (pelicula != null) {
+            TextView tvTitulo = findViewById(R.id.textView9);
+            ImageView ivPortada = findViewById(R.id.imageView3);
+
+            ivPortada.setImageResource(pelicula.getPortada());
+            actionBar.setTitle(pelicula.getTitulo());
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
