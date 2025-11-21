@@ -106,7 +106,7 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
 
                     // Crear Intent y pasar la película
                     Intent intent = new Intent(view.getContext(), Infoextrapelis.class);
-                    intent.putExtra("pelicula_seleccionada", peliculaSeleccionada);
+                    intent.putExtra("pos", selectedPos);
                     view.getContext().startActivity(intent);
                 }
             });
