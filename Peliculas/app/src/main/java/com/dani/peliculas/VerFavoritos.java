@@ -1,9 +1,15 @@
 package com.dani.peliculas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBar;
@@ -31,32 +37,61 @@ public class VerFavoritos extends AppCompatActivity {
 
         Datos datos = new Datos();
         ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
-        AdaptadorFavoritos adaptadorFavoritos = new AdaptadorFavoritos(peliculas);
-        RecyclerView rvfavoritos = findViewById(R.id.rvfavoritos);
-        rvfavoritos.setAdapter(adaptadorFavoritos);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
-        //GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
-        rvfavoritos.setLayoutManager(gridLayoutManager);
 
         //ActionBar donde aparece la flecha para volver a la MainActivity
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Peliculas");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         getWindow().setNavigationBarColor(getColor(R.color.blue));
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getOnBackPressedDispatcher().onBackPressed();
+
+        ArrayList titulos = new ArrayList<>();
+        for (Pelicula pelicula : peliculas){
+            titulos.add(pelicula.getTitulo() + pelicula.getDirector());
         }
-        return super.onOptionsItemSelected(item);
+
+        ListView listView = findViewById(R.id.lview);
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_checked, titulos);
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
+        listView.setAdapter(adapter);
+
+        ArrayList<Integer> marcadas = getIntent().getIntegerArrayListExtra("marcadas");
+
+        if (marcadas != null) {
+            for (int i = 0; i < marcadas.size(); i++) {
+                listView.setItemChecked(marcadas.get(i), true);
+            }
+        }
+        listView.setItemChecked(2,true);
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (item.getItemId() == android.R.id.home) {
+            getOnBackPressedDispatcher().onBackPressed();
+        } else if (id == R.id.bguardar) {
+
+            ListView lview = findViewById(R.id.lview);
+            ArrayList seleccionadas = new ArrayList<>();
+
+            for (int i = 0; i < lview.getCount(); i++) {
+                if (lview.isItemChecked(i)) {
+                    seleccionadas.add(i);
+                }
+            }
+
+                Intent intent = new Intent();
+                intent.putIntegerArrayListExtra("seleccionadas", seleccionadas);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        return super.onOptionsItemSelected(item);
+    }
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_secundario, menu);
         return true;
+
     }
 }

@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/bguardar"
         android:icon="@android:drawable/ic_menu_save"
-        android:title="Item"
+        android:title="guardar"
         app:showAsAction="always" />
 </menu>

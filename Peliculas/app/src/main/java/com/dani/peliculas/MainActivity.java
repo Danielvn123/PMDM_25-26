@@ -6,8 +6,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +28,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<Pelicula> peliculas = new ArrayList<>();
+    ArrayList<Integer> seleccionGuardada = new ArrayList<>();
+
+    GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Datos datos = new Datos();
-        ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
+        peliculas = datos.rellenaPeliculas();
         AdaptadorPelicula adaptadorPelicula = new AdaptadorPelicula(peliculas);
         RecyclerView rvpelis = findViewById(R.id.rvpelis);
         rvpelis.setAdapter(adaptadorPelicula);
@@ -62,6 +72,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    private ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    ArrayList<Integer> seleccionadas = result.getData().getIntegerArrayListExtra("seleccionadas");
+                    if (seleccionadas != null) {
+                        seleccionGuardada = seleccionadas;
+                        for (Integer pos : seleccionadas) {
+                            if (pos >= 0 && pos < peliculas.size()) {
+                                Pelicula peli = peliculas.get(pos);
+                            }
+                        }
+                    }
+                }
+            }
+    );
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -78,8 +104,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.mfavoritos) {
-            Intent intent = new Intent(this, VerFavoritos.class);
-            startActivity(intent);
+            Intent intentFavoritos = new Intent(MainActivity.this, VerFavoritos.class);
+            intentFavoritos.putIntegerArrayListExtra("marcadas", seleccionGuardada);
+            launcher.launch(intentFavoritos);
             return true;
         } else if (id == R.id.manadir) {
             Intent intent = new Intent(this, NuevaPelicula.class);
