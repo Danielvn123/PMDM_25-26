@@ -46,7 +46,7 @@ public class VerFavoritos extends AppCompatActivity {
 
         ArrayList titulos = new ArrayList<>();
         for (Pelicula pelicula : peliculas){
-            titulos.add(pelicula.getTitulo() + pelicula.getDirector());
+            titulos.add(pelicula.getTitulo() + "\n" + pelicula.getDirector());
         }
 
         ListView listView = findViewById(R.id.lview);

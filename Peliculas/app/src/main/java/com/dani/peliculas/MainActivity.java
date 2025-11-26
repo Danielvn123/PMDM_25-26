@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> seleccionGuardada = new ArrayList<>();
 
     GridLayoutManager gridLayoutManager;
+    boolean vista = false;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         Datos datos = new Datos();
         peliculas = datos.rellenaPeliculas();
+
         AdaptadorPelicula adaptadorPelicula = new AdaptadorPelicula(peliculas);
         RecyclerView rvpelis = findViewById(R.id.rvpelis);
         rvpelis.setAdapter(adaptadorPelicula);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+
+        gridLayoutManager = new GridLayoutManager(this, 1);
         //GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
         rvpelis.setLayoutManager(gridLayoutManager);
 
@@ -60,10 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Para quitar la ActionBar al pulsar el floatingActionButton
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
+        floatingActionButton.setOnClickListener(v -> {
+            if (actionBar != null) {
                 if (actionBar.isShowing()) {
                     actionBar.hide();
                 } else {
@@ -113,10 +115,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.mvista) {
-            return true;
+            vista = !vista;
+            gridLayoutManager.setSpanCount(vista ? 2 : 1);
+
+            // Actualiza icono según estado
+            if (vista) {
+                item.setIcon(R.drawable.vista_2);
+            } else {
+                item.setIcon(R.drawable.vista_1);
+            }
         } else if (id == R.id.mverfav) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
