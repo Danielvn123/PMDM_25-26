@@ -116,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.mvista) {
             vista = !vista;
+
             gridLayoutManager.setSpanCount(vista ? 2 : 1);
+            gridLayoutManager.requestLayout();  // fuerza el relayout sin necesidad del adapter
 
             // Actualiza icono según estado
             if (vista) {
