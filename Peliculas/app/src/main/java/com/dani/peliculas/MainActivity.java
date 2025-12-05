@@ -1,6 +1,7 @@
 package com.dani.peliculas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     boolean vista = false;
     ActionBar actionBar;
 
+    boolean mostrandoFavoritos = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences prefs = getSharedPreferences("favoritos", MODE_PRIVATE);
+
+        for (Pelicula p : peliculas) {
+            boolean fav = prefs.getBoolean(p.getTitulo(), false);
+            p.setFavorita(fav);
+        }
 
         Datos datos = new Datos();
         peliculas = datos.rellenaPeliculas();
@@ -58,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         rvpelis.setLayoutManager(gridLayoutManager);
 
         //Creamos el actionBar y dps ponemos que en el subtitulo salga el numero de peliculas que hay
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setSubtitle(String.valueOf(peliculas.toArray().length));
         getWindow().setNavigationBarColor(getColor(R.color.blue));
 
@@ -90,6 +100,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
     );
+
+    private ArrayList<Pelicula> obtenerFavoritas() {
+        ArrayList<Pelicula> favoritas = new ArrayList<>();
+
+        for (Pelicula p : peliculas) {
+            if (p.getFavorita()) {
+                favoritas.add(p);
+            }
+        }
+
+        return favoritas;
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -127,8 +150,29 @@ public class MainActivity extends AppCompatActivity {
                 item.setIcon(R.drawable.vista_1);
             }
         } else if (id == R.id.mverfav) {
+
+            RecyclerView rvpelis = findViewById(R.id.rvpelis);
+
+            if (!mostrandoFavoritos) {
+                ArrayList<Pelicula> favoritas = obtenerFavoritas();
+
+                AdaptadorPelicula adaptadorFavoritos = new AdaptadorPelicula(favoritas);
+                rvpelis.setAdapter(adaptadorFavoritos);
+
+                actionBar.setTitle("Favoritos (" + favoritas.size() + ")");
+                mostrandoFavoritos = true;
+
+            } else {
+                AdaptadorPelicula adaptadorCompleto = new AdaptadorPelicula(peliculas);
+                rvpelis.setAdapter(adaptadorCompleto);
+
+                actionBar.setTitle("Películas (" + peliculas.size() + ")");
+                mostrandoFavoritos = false;
+            }
+
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

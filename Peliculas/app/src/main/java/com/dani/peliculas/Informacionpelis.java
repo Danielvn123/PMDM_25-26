@@ -1,6 +1,7 @@
 package com.dani.peliculas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -29,14 +30,29 @@ public class Informacionpelis extends AppCompatActivity {
                     return insets;
                 });
 
-            Datos datos = new Datos();
-            ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
-            AdaptadorInformacion adaptadorInformacion = new AdaptadorInformacion(peliculas);
-            RecyclerView rvinfopelis = findViewById(R.id.rvinfopelis);
-            rvinfopelis.setAdapter(adaptadorInformacion);
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
-            //GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
-            rvinfopelis.setLayoutManager(gridLayoutManager);
+        Datos datos = new Datos();
+        ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
+
+        SharedPreferences prefs = getSharedPreferences("favoritos", MODE_PRIVATE);
+        for (Pelicula p : peliculas) {
+            boolean favorita = prefs.getBoolean(p.getTitulo(), false);
+            p.setFavorita(favorita);
+        }
+
+        AdaptadorInformacion adaptadorInformacion = new AdaptadorInformacion(peliculas);
+        RecyclerView rvinfopelis = findViewById(R.id.rvinfopelis);
+        rvinfopelis.setAdapter(adaptadorInformacion);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
+        //GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this,2, LinearLayoutManager.HORIZONTAL,false);
+        rvinfopelis.setLayoutManager(gridLayoutManager);
+
+        // Filtrar solo las favoritas
+        ArrayList<Pelicula> favoritas = new ArrayList<>();
+        for (Pelicula p : peliculas) {
+            if (p.getFavorita()) {
+                favoritas.add(p);
+            }
+        }
 
         //ActionBar donde aparece la flecha para volver a la MainActivity
         ActionBar actionBar = getSupportActionBar();

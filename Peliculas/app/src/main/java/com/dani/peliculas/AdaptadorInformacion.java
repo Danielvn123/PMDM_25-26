@@ -1,6 +1,8 @@
 package com.dani.peliculas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,17 @@ public class AdaptadorInformacion extends RecyclerView.Adapter<AdaptadorInformac
         }else{
             holder.favorita.setVisibility(View.GONE);
         }
+
+        holder.favorita.setOnClickListener(v -> {
+            pelicula.setFavorita(!pelicula.getFavorita());
+            notifyItemChanged(position);
+
+            SharedPreferences prefs = holder.itemView.getContext()
+                    .getSharedPreferences("favoritos", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean(pelicula.getTitulo(), pelicula.getFavorita());
+            editor.apply();
+        });
     }
 
     @Override

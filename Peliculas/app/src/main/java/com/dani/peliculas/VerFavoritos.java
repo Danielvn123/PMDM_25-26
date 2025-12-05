@@ -1,6 +1,7 @@
 package com.dani.peliculas;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,11 +75,20 @@ public class VerFavoritos extends AppCompatActivity {
             ListView lview = findViewById(R.id.lview);
             ArrayList seleccionadas = new ArrayList<>();
 
+            SharedPreferences prefs = getSharedPreferences("favoritos", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            Datos datos = new Datos();
+            ArrayList<Pelicula> peliculas = datos.rellenaPeliculas();
             for (int i = 0; i < lview.getCount(); i++) {
-                if (lview.isItemChecked(i)) {
-                    seleccionadas.add(i);
-                }
-            }
+                boolean marcada = lview.isItemChecked(i);
+                Pelicula p = peliculas.get(i);
+                // 🔥 GUARDA CORRECTAMENTE EL FAVORITO
+                editor.putBoolean(p.getTitulo(), marcada);
+                if (marcada) {
+                    seleccionadas.add(i); } }
+
+            editor.apply();
 
                 Intent intent = new Intent();
                 intent.putIntegerArrayListExtra("seleccionadas", seleccionadas);
